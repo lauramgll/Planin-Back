@@ -23,11 +23,13 @@ public class TransaccionController {
     @Autowired
     TransaccionRepository transaccionRepository;
 
+    // Listar transacciones
     @GetMapping
     public List<Transaccion> findAll(){
         return transaccionService.findAll();
     }
 
+    // Listar transacción por id
     @GetMapping(path = "/{id}")
     public Transaccion findById(@PathVariable("id") Long id) {
         Transaccion transaccion = new Transaccion();
@@ -40,6 +42,7 @@ public class TransaccionController {
         }
     }
 
+    // Actualizar transacción por id
     @PutMapping(path = "/{id}", consumes = "application/json")
     public ResponseEntity<Transaccion> actualizarTransaccion(@PathVariable Long id, @RequestBody Transaccion transaccion){
         if (id == null){
@@ -50,6 +53,7 @@ public class TransaccionController {
             return ResponseEntity.ok(transaccion);
     }
 
+    // Crear transacción
     @PostMapping(path = "/crearTransaccion")
     public ResponseEntity<Transaccion> crearTransaccion(@RequestBody Transaccion transaccion){
         if (transaccion == null){
@@ -59,6 +63,7 @@ public class TransaccionController {
         return ResponseEntity.ok(transaccion);
     }
 
+    // Actualizar transacción
     @PutMapping(path = "/")
     public ResponseEntity<Transaccion> actualizarTransaccion(@RequestBody Transaccion transaccion){
         if (transaccion.getId() == null || !transaccionRepository.existsById(transaccion.getId())){
@@ -68,6 +73,7 @@ public class TransaccionController {
         return ResponseEntity.ok(transaccion);
     }
 
+    // Borrar transacción
     @DeleteMapping(path = "/{idTransaccion}")
     public ResponseEntity<Transaccion> eliminarTransaccion(@PathVariable Long idTransaccion){
         if (idTransaccion == null || !transaccionRepository.existsById(idTransaccion)){

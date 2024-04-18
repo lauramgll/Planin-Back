@@ -23,11 +23,13 @@ public class CuentaController {
     @Autowired
     CuentaRepository cuentaRepository;
 
+    // Listar cuentas
     @GetMapping
     public List<Cuenta> findAll(){
         return cuentaService.findAll();
     }
 
+    // Listar cuentas por id
     @GetMapping(path = "/{id}")
     public Cuenta findById(@PathVariable("id") Long id) {
         Cuenta cuenta = new Cuenta();
@@ -40,6 +42,7 @@ public class CuentaController {
         }
     }
 
+    // Actualizar cuenta por id
     @PutMapping(path = "/{id}", consumes = "application/json")
     public ResponseEntity<Cuenta> actualizarCuenta(@PathVariable Long id, @RequestBody Cuenta cuenta){
         if (id == null){
@@ -50,6 +53,7 @@ public class CuentaController {
             return ResponseEntity.ok(cuenta);
     }
 
+    // Crear cuenta
     @PostMapping(path = "/crearCuenta")
     public ResponseEntity<Cuenta> crearCuenta(@RequestBody Cuenta cuenta){
         if (cuenta == null){
@@ -59,6 +63,7 @@ public class CuentaController {
         return ResponseEntity.ok(cuenta);
     }
 
+    // Actualizar cuenta
     @PutMapping(path = "/")
     public ResponseEntity<Cuenta> actualizarCuenta(@RequestBody Cuenta cuenta){
         if (cuenta.getId() == null || !cuentaRepository.existsById(cuenta.getId())){
@@ -68,6 +73,7 @@ public class CuentaController {
         return ResponseEntity.ok(cuenta);
     }
 
+    // Borrar cuenta
     @DeleteMapping(path = "/{idCuenta}")
     public ResponseEntity<Cuenta> eliminarCuenta(@PathVariable Long idCuenta){
         if (idCuenta == null || !cuentaRepository.existsById(idCuenta)){

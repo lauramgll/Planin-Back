@@ -5,7 +5,6 @@ import com.planin.api.repository.entity.Usuario;
 import com.planin.api.service.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +22,13 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
+    // Listar usuarios
     @GetMapping
     public List<Usuario> findAll(){
         return usuarioService.findAll();
     }
 
+    // Listar usuario por id
     @GetMapping(path = "/{id}")
     public Usuario findById(@PathVariable("id") Long id) {
         Usuario usuario = new Usuario();
@@ -40,6 +41,7 @@ public class UsuarioController {
         }
     }
 
+    // Actualizar usuario por id
     @PutMapping(path = "/{id}", consumes = "application/json")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario){
         if (id == null){
@@ -50,6 +52,7 @@ public class UsuarioController {
             return ResponseEntity.ok(usuario);
     }
 
+    // Crear usuario
     @PostMapping(path = "/crearUsuario")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario){
         if (usuario == null){
@@ -59,6 +62,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    // Actualizar usuario
     @PutMapping(path = "/")
     public ResponseEntity<Usuario> actualizarUsuario(@RequestBody Usuario usuario){
         if (usuario.getId() == null || !usuarioRepository.existsById(usuario.getId())){
@@ -66,14 +70,5 @@ public class UsuarioController {
         }
         usuarioRepository.save(usuario);
         return ResponseEntity.ok(usuario);
-    }
-
-    @DeleteMapping(path = "/{idUsuario}")
-    public ResponseEntity<Usuario> eliminarUsuario(@PathVariable Long idUsuario){
-        if (idUsuario == null || !usuarioRepository.existsById(idUsuario)){
-            return ResponseEntity.badRequest().build();
-        }
-        usuarioRepository.deleteById(idUsuario);
-        return new ResponseEntity("Usuario eliminado correctamente", HttpStatus.OK);
     }
 }
