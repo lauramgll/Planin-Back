@@ -19,5 +19,5 @@ public class Usuario {
 
     private String password;
 
-    private String vistaDecimal;
+    private boolean vistaDecimal;
 }
