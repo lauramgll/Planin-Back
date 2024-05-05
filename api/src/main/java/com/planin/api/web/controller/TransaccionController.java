@@ -82,4 +82,14 @@ public class TransaccionController {
         transaccionRepository.deleteById(idTransaccion);
         return new ResponseEntity("Transacción eliminada correctamente", HttpStatus.OK);
     }
+
+    // Transacciones por usuario
+    @GetMapping(path = "/usuario/{idUsuario}")
+    public ResponseEntity<List<Transaccion>> obtenerTransaccionesPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
+        List<Transaccion> transacciones = transaccionService.obtenerTransaccionesDeUsuario(idUsuario);
+        if (transacciones == null || transacciones.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(transacciones);
+    }
 }

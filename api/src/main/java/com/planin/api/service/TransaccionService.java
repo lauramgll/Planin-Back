@@ -57,4 +57,8 @@ public class TransaccionService implements BaseService<Transaccion> {
         return false;
     }
     
+    @Transactional
+    public List<Transaccion> obtenerTransaccionesDeUsuario(Long usuarioId) {
+        return transaccionRepository.findTransaccionesByUsuarioId(usuarioId);
+    }
 }
