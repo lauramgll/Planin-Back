@@ -57,4 +57,8 @@ public class CuentaService implements BaseService<Cuenta> {
         return false;
     }
     
+    @Transactional
+    public List<Cuenta> getCuentasByIdUsuario(Long idUsuario) {
+        return cuentaRepository.findByIdUsuario(idUsuario);
+    }
 }

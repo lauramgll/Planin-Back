@@ -82,4 +82,10 @@ public class CuentaController {
         cuentaRepository.deleteById(idCuenta);
         return new ResponseEntity("Cuenta eliminada correctamente", HttpStatus.OK);
     }
+
+    // Cuentas por usuario
+    @GetMapping(path = "/usuario/{idUsuario}")
+    public List<Cuenta> getCuentasByIdUsuario(@PathVariable Long idUsuario) {
+        return cuentaService.getCuentasByIdUsuario(idUsuario);
+    }
 }

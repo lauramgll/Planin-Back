@@ -13,6 +13,7 @@ public class Cuenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "id_usuario")
     private Long idUsuario;
     
     private String nombre;
