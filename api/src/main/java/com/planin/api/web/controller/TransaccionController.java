@@ -53,7 +53,7 @@ public class TransaccionController {
             return ResponseEntity.ok(transaccion);
     }
 
-    // Crear transacción
+    // Crear transacción (1)
     @PostMapping(path = "/crearTransaccion")
     public ResponseEntity<Transaccion> crearTransaccion(@RequestBody Transaccion transaccion){
         if (transaccion == null){
@@ -61,6 +61,24 @@ public class TransaccionController {
         }
         transaccionService.save(transaccion);
         return ResponseEntity.ok(transaccion);
+    }
+
+     // Crear transacción (varias)
+    @PostMapping(path = "/crearTransacciones")
+    public ResponseEntity<List<Transaccion>> crearTransacciones(@RequestBody List<Transaccion> transacciones) {
+        if (transacciones == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        
+        // Procesar cada transacción individualmente
+        for (Transaccion transaccion : transacciones) {
+            if (transaccion == null) {
+                return ResponseEntity.badRequest().build();
+            }
+            transaccionService.save(transaccion);
+        }
+        
+        return ResponseEntity.ok(transacciones);
     }
 
     // Actualizar transacción
