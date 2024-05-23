@@ -110,4 +110,17 @@ public class TransaccionController {
         }
         return ResponseEntity.ok(transacciones);
     }
+
+    // Para filtrado
+    @GetMapping(path = "/usuario/{idUsuario}/{ft}/{fc}")
+    public ResponseEntity<List<Transaccion>> obtenerTransaccionesPorUsuario(
+            @PathVariable("idUsuario") Long idUsuario,
+            @PathVariable("ft") String ft,
+            @PathVariable("fc") String fc) {
+        List<Transaccion> transacciones = transaccionService.transaccionesFiltros(idUsuario, ft, fc);
+        if (transacciones == null || transacciones.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(transacciones);
+    }
 }

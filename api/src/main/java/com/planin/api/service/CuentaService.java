@@ -61,4 +61,10 @@ public class CuentaService implements BaseService<Cuenta> {
     public List<Cuenta> getCuentasByIdUsuario(Long idUsuario) {
         return cuentaRepository.findByIdUsuario(idUsuario);
     }
+
+    // Para filtrado
+    @Transactional
+    public Cuenta findByNombre(String nombre){
+        return cuentaRepository.findByNombre(nombre);
+    }
 }
