@@ -1,17 +1,16 @@
 package com.planin.api.service;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.planin.api.repository.dao.TransaccionRepository;
 import com.planin.api.repository.entity.Transaccion;
 
 import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Service;
 
 @Service
 public class TransaccionService implements BaseService<Transaccion> {
@@ -72,12 +71,21 @@ public class TransaccionService implements BaseService<Transaccion> {
     anyo 5 -> 2029
      */
     @Transactional
-    public List<Transaccion> transaccionesFiltros(Long usuarioId, String ft, String fc) {
+    public List<Transaccion> transaccionesFiltros(Long usuarioId, String ft, Long fc) {
         LocalDate fecha = obtenerFechasFiltroTemporal(ft);
         if(ft.contains("mes")){
-            return transaccionRepository.findByIdCuentaAndMonth(usuarioId, fecha.getMonthValue(), fecha.getYear());
+            if(fc != 0){
+                return transaccionRepository.findByUserMonthCuenta(usuarioId, fecha.getMonthValue(), fecha.getYear(), fc);
+            } else {
+                return transaccionRepository.findByUserMonth(usuarioId, fecha.getMonthValue(), fecha.getYear());
+            }
         }else {
-            return transaccionRepository.findByIdCuentaAndAnyo(usuarioId, fecha.getYear());
+            if(fc != 0){
+                return transaccionRepository.findByUserAnyoCuenta(usuarioId, fecha.getYear(), fc);
+            } else {
+                return transaccionRepository.findByUserAnyo(usuarioId, fecha.getYear());
+            }
+            
         }
     }
 
