@@ -5,10 +5,12 @@ import com.planin.api.repository.entity.Transaccion;
 import com.planin.api.service.TransaccionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -123,4 +125,14 @@ public class TransaccionController {
         }
         return ResponseEntity.ok(transacciones);
     }
+
+    /*
+    // Para prueba filtrado 2.0
+    @GetMapping(path = "/filtradas")
+    public List<Transaccion> getTransaccionesFiltradas(
+            @RequestParam(required = false) Long idCuenta,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") YearMonth fecha) {
+        return transaccionService.getTransaccionesFiltradas(idCuenta, fecha);
+    }
+    */
 }

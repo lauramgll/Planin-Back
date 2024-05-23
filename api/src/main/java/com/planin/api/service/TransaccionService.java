@@ -1,6 +1,7 @@
 package com.planin.api.service;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Optional;
 
@@ -100,4 +101,19 @@ public class TransaccionService implements BaseService<Transaccion> {
             return LocalDate.of(Integer.parseInt(anyo), 1, 1);
         }
     }
+
+    /*
+    // Para prueba filtrado 2.0
+    public List<Transaccion> getTransaccionesFiltradas(Long idCuenta, YearMonth fecha) {
+        if (idCuenta != null && fecha != null) {
+            return transaccionRepository.findByCuentaAndFecha(idCuenta, fecha.getYear(), fecha.getMonthValue());
+        } else if (idCuenta != null) {
+            return transaccionRepository.findByIdCuenta(idCuenta);
+        } else if (fecha != null) {
+            return transaccionRepository.findByFecha(fecha.getYear(), fecha.getMonthValue());
+        } else {
+            return transaccionRepository.findAll();
+        }
+    }
+    */
 }
