@@ -39,5 +39,4 @@ public interface TransaccionRepository extends JpaRepository<Transaccion, Long> 
 
     @Query("SELECT t FROM Transaccion t WHERE YEAR(t.fecha) = :year AND MONTH(t.fecha) = :month")
     List<Transaccion> findByFecha(@Param("year") Integer year, @Param("month") Integer month);
-    */
 }

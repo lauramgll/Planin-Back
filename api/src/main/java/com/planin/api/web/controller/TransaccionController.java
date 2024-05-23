@@ -132,7 +132,6 @@ public class TransaccionController {
         return ResponseEntity.ok(transacciones);
     }
 
-    /*
     // Para prueba filtrado 2.0
     @GetMapping(path = "/filtradas")
     public List<Transaccion> getTransaccionesFiltradas(
@@ -140,5 +139,5 @@ public class TransaccionController {
             @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") YearMonth fecha) {
         return transaccionService.getTransaccionesFiltradas(idCuenta, fecha);
     }
-    */
+
 }

@@ -110,7 +110,6 @@ public class TransaccionService implements BaseService<Transaccion> {
         }
     }
 
-    /*
     // Para prueba filtrado 2.0
     public List<Transaccion> getTransaccionesFiltradas(Long idCuenta, YearMonth fecha) {
         if (idCuenta != null && fecha != null) {
@@ -123,5 +122,4 @@ public class TransaccionService implements BaseService<Transaccion> {
             return transaccionRepository.findAll();
         }
     }
-    */
 }
