@@ -26,17 +26,4 @@ public interface TransaccionRepository extends JpaRepository<Transaccion, Long> 
 
     @Query("SELECT t FROM Transaccion t INNER JOIN Cuenta c ON t.idCuenta = c.id WHERE c.idUsuario = :uid AND YEAR(t.fecha) = :any")
     List<Transaccion> findByUserAnyo(Long uid, int any);
-    /*
-    // Para prueba filtrado 2.0
-    @Query("SELECT t FROM Transaccion t WHERE (:cuenta IS NULL OR t.idCuenta = :cuenta) " +
-    "AND (:year IS NULL OR YEAR(t.fecha) = :year) " +
-    "AND (:month IS NULL OR MONTH(t.fecha) = :month)")
-    List<Transaccion> findByCuentaAndFecha(@Param("cuenta") Long cuenta,
-                                     @Param("year") Integer year,
-                                     @Param("month") Integer month);
-
-    List<Transaccion> findByIdCuenta(Long cuenta); 
-
-    @Query("SELECT t FROM Transaccion t WHERE YEAR(t.fecha) = :year AND MONTH(t.fecha) = :month")
-    List<Transaccion> findByFecha(@Param("year") Integer year, @Param("month") Integer month);
 }

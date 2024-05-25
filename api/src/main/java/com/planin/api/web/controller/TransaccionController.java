@@ -119,6 +119,7 @@ public class TransaccionController {
         return ResponseEntity.ok(transacciones);
     }
 
+    /*
     // Para filtrado
     @GetMapping(path = "/usuario/{idUsuario}/{ft}/{fc}")
     public ResponseEntity<List<Transaccion>> obtenerTransaccionesPorUsuario(
@@ -131,13 +132,24 @@ public class TransaccionController {
         }
         return ResponseEntity.ok(transacciones);
     }
-
-    // Para prueba filtrado 2.0
-    @GetMapping(path = "/filtradas")
-    public List<Transaccion> getTransaccionesFiltradas(
-            @RequestParam(required = false) Long idCuenta,
-            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") YearMonth fecha) {
-        return transaccionService.getTransaccionesFiltradas(idCuenta, fecha);
+    */
+    @GetMapping("/{uid}/mes/{mes}/year/{any}/cuenta/{idCuenta}")
+    public List<Transaccion> findByUserMonthCuenta(@PathVariable Long uid, @PathVariable int mes, @PathVariable int any, @PathVariable Long idCuenta) {
+        return transaccionService.findByUserMonthCuenta(uid, mes, any, idCuenta);
     }
 
+    @GetMapping("/{uid}/mes/{mes}/year/{any}")
+    public List<Transaccion> findByUserMonth(@PathVariable Long uid, @PathVariable int mes, @PathVariable int any) {
+        return transaccionService.findByUserMonth(uid, mes, any);
+    }
+
+    @GetMapping("/{uid}/year/{any}/cuenta/{idCuenta}")
+    public List<Transaccion> findByUserAnyoCuenta(@PathVariable Long uid, @PathVariable int any, @PathVariable Long idCuenta) {
+        return transaccionService.findByUserAnyoCuenta(uid, any, idCuenta);
+    }
+
+    @GetMapping("/{uid}/year/{any}")
+    public List<Transaccion> findByUserAnyo(@PathVariable Long uid, @PathVariable int any) {
+        return transaccionService.findByUserAnyo(uid, any);
+    }
 }

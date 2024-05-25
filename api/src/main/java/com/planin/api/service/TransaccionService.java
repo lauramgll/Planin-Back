@@ -69,7 +69,7 @@ public class TransaccionService implements BaseService<Transaccion> {
     Ejemplo:
     mes 3 -> Si la fecha atual es 14/05/24 -> 08/24
     anyo 5 -> 2029
-     */
+
     @Transactional
     public List<Transaccion> transaccionesFiltros(Long usuarioId, String ft, Long fc) {
         LocalDate fecha = obtenerFechasFiltroTemporal(ft);
@@ -109,17 +109,21 @@ public class TransaccionService implements BaseService<Transaccion> {
             return LocalDate.of(Integer.parseInt(anyo), 1, 1);
         }
     }
+    */
 
-    // Para prueba filtrado 2.0
-    public List<Transaccion> getTransaccionesFiltradas(Long idCuenta, YearMonth fecha) {
-        if (idCuenta != null && fecha != null) {
-            return transaccionRepository.findByCuentaAndFecha(idCuenta, fecha.getYear(), fecha.getMonthValue());
-        } else if (idCuenta != null) {
-            return transaccionRepository.findByIdCuenta(idCuenta);
-        } else if (fecha != null) {
-            return transaccionRepository.findByFecha(fecha.getYear(), fecha.getMonthValue());
-        } else {
-            return transaccionRepository.findAll();
-        }
+    public List<Transaccion> findByUserMonthCuenta(Long uid, int mes, int any, Long idCuenta) {
+        return transaccionRepository.findByUserMonthCuenta(uid, mes, any, idCuenta);
+    }
+
+    public List<Transaccion> findByUserMonth(Long uid, int mes, int any) {
+        return transaccionRepository.findByUserMonth(uid, mes, any);
+    }
+
+    public List<Transaccion> findByUserAnyoCuenta(Long uid, int any, Long idCuenta) {
+        return transaccionRepository.findByUserAnyoCuenta(uid, any, idCuenta);
+    }
+
+    public List<Transaccion> findByUserAnyo(Long uid, int any) {
+        return transaccionRepository.findByUserAnyo(uid, any);
     }
 }
