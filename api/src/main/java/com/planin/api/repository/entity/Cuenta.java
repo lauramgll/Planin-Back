@@ -18,6 +18,8 @@ public class Cuenta {
     
     private String nombre;
 
+    private Double saldoInicial;
+    
     private Double saldo;
 
     private String predeterminada;

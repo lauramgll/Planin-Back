@@ -1,5 +1,6 @@
 package com.planin.api.web.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -114,7 +115,7 @@ public class TransaccionController {
     public ResponseEntity<List<Transaccion>> obtenerTransaccionesPorUsuario(@PathVariable("idUsuario") Long idUsuario) {
         List<Transaccion> transacciones = transaccionService.obtenerTransaccionesDeUsuario(idUsuario);
         if (transacciones == null || transacciones.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(new ArrayList<>());
         }
         return ResponseEntity.ok(transacciones);
     }
